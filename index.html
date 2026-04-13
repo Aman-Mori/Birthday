@@ -1,226 +1,331 @@
-```html id="cleanpro01"
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Blow Candle 🎂</title>
+<title>Birthday Ultimate 🎂</title>
 
 <style>
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #141e30, #243b55);
-    color: white;
+  margin: 0;
+  background: radial-gradient(circle at bottom, #0f2027, #203a43, #000);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  color: white;
 }
 
-/* Top UI */
-.controls {
-    margin-top: 40px;
+/* Heading */
+h1 {
+  margin-top: 40px;
+  font-weight: 300;
 }
 
+/* Input */
+.input-box {
+  margin-top: 30px;
+}
 input, select, button {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 6px;
-    border: none;
-    font-size: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  margin: 5px;
 }
-
 button {
-    background: linear-gradient(45deg, #ff6a00, #ee0979);
-    color: white;
-    cursor: pointer;
+  background: #ff7e5f;
+  color: white;
+  cursor: pointer;
 }
 
-/* Stage */
-.stage {
-    margin-top: 80px;
-    position: relative;
+/* Scene */
+#scene {
+  margin-top: 100px;
+  position: relative;
 }
 
-/* Cake */
+/* ===== 🎂 CAKE ===== */
 .cake {
-    width: 220px;
-    margin: auto;
+  position: relative;
+  width: 260px;
+  margin: auto;
+}
+
+.top {
+  height: 30px;
+  background: #fff;
+  border-radius: 50%;
+  margin-bottom: -15px;
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .layer {
-    height: 50px;
-    border-radius: 10px;
+  height: 55px;
+  border-radius: 12px;
+  background: linear-gradient(to bottom, #fff, #eee);
+  margin-top: -12px;
+  box-shadow: 
+    inset 0 5px 10px rgba(255,255,255,0.8),
+    0 10px 25px rgba(0,0,0,0.5);
 }
 
-.layer1 { background: #ff9a9e; }
-.layer2 { background: #fad0c4; margin-top: -8px; }
-.layer3 { background: #fbc2eb; margin-top: -8px; }
+/* ===== 🕯️ CANDLE COMMON ===== */
+.candle-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
-/* Candle */
 .candle {
-    width: 10px;
-    height: 45px;
-    background: #fff;
-    position: absolute;
-    top: -45px;
-    border-radius: 2px;
+  width: 18px;
+  height: 140px;
+  border-radius: 10px;
+  background: linear-gradient(#f5f5f5, #ddd);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+/* Only candle mode base glow */
+.floor-glow {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 30px;
+  background: radial-gradient(circle, rgba(255,200,100,0.3), transparent);
+  border-radius: 50%;
+}
+
+/* Wick */
+#knot {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 3px;
+  height: 12px;
+  background: #222;
+  transform: translateX(-50%);
 }
 
 /* Flame */
 .flame {
-    width: 12px;
-    height: 18px;
-    background: radial-gradient(circle, yellow, orange, red);
-    border-radius: 50%;
-    position: absolute;
-    top: -18px;
-    animation: flicker 0.2s infinite ease-in-out;
+  position: absolute;
+  bottom: 112%;
+  left: 50%;
+  width: 18px;
+  height: 30px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, #fff, #ffd700, #ff8c00);
+  border-radius: 50%;
+  animation: flicker 0.15s infinite alternate;
+  box-shadow: 0 0 30px orange;
 }
 
 @keyframes flicker {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.25); }
+  from { transform: translateX(-50%) scale(1); }
+  to { transform: translateX(-48%) scale(1.15); }
 }
 
-/* Blow effect */
-.blow {
-    animation: fadeOut 0.6s forwards;
+/* Glow */
+.glow {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  box-shadow: 0 0 80px 40px rgba(255,200,100,0.25);
+  animation: glow 2s infinite;
 }
 
-@keyframes fadeOut {
-    to { opacity: 0; transform: scale(0.5); }
+@keyframes glow {
+  0%,100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Smoke */
+.smoke {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: gray;
+  border-radius: 50%;
+  opacity: 0;
+}
+.smoke.active {
+  animation: smokeUp 2s forwards;
+}
+@keyframes smokeUp {
+  to { transform: translateY(-100px) scale(2.5); opacity: 0; }
 }
 
 /* Message */
-.msg {
-    margin-top: 30px;
-    font-size: 28px;
-    display: none;
-    opacity: 0;
-    transition: 0.8s;
+.message {
+  display: none;
+  margin-top: 20px;
+  font-size: 28px;
+  color: gold;
 }
 
-.msg.show {
-    display: block;
-    opacity: 1;
+/* Controls */
+.controls {
+  display: none;
+  margin-top: 20px;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  top: 0;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to { transform: translateY(100vh); }
 }
 </style>
+
 </head>
 
 <body>
 
-<h1>🎂 Blow the Candle</h1>
+<h1>🎂 Birthday Magic 🎉</h1>
 
-<div class="controls">
-    <input type="text" id="name" placeholder="Enter Name">
-    
-    <select id="mode">
-        <option value="candle">Only Candles</option>
-        <option value="cake">Cake + Candles</option>
-    </select>
-
-    <button onclick="start()">Start</button>
+<div class="input-box">
+  <input type="text" id="name" placeholder="Enter Name">
+  <select id="mode">
+    <option value="cake">Cake + Candle</option>
+    <option value="candle">Only Candle</option>
+  </select>
+  <button onclick="start()">Start</button>
 </div>
 
-<div class="stage" id="stage"></div>
+<div id="scene"></div>
 
-<div class="msg" id="msg"></div>
+<div class="message" id="msg"></div>
+
+<div class="controls" id="controls">
+  <button onclick="stopMusic()">Stop Music ⏹️</button>
+  <button onclick="location.reload()">Restart 🔁</button>
+</div>
+
+<audio id="song" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c7d1c8e9c.mp3"></audio>
 
 <script>
 let blown = false;
 
 function start() {
-    const name = document.getElementById("name").value.trim();
-    const mode = document.getElementById("mode").value;
+  const name = document.getElementById("name").value.trim();
+  const mode = document.getElementById("mode").value;
 
-    if(name === ""){
-        alert("Name enter karo");
-        return;
-    }
+  if (!name) {
+    alert("Enter name 😄");
+    return;
+  }
 
-    document.querySelector(".controls").style.display = "none";
+  document.querySelector(".input-box").style.display = "none";
 
-    const stage = document.getElementById("stage");
-    stage.innerHTML = "";
+  const scene = document.getElementById("scene");
 
-    let base;
+  if (mode === "cake") {
+    scene.innerHTML = `
+      <div class="cake">
+        <div class="top"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
+        <div class="layer"></div>
 
-    if(mode === "cake"){
-        base = document.createElement("div");
-        base.className = "cake";
-        base.innerHTML = `
-            <div class="layer layer1"></div>
-            <div class="layer layer2"></div>
-            <div class="layer layer3"></div>
-        `;
-        stage.appendChild(base);
-    } else {
-        base = stage;
-    }
+        <div class="candle-wrapper" style="top:-70px;">
+          <div class="candle" id="candle"></div>
+        </div>
+      </div>
+    `;
+  } else {
+    scene.innerHTML = `
+      <div class="candle-wrapper" style="top:0;">
+        <div class="candle" id="candle"></div>
+        <div class="floor-glow"></div>
+      </div>
+    `;
+  }
 
-    createCandles(base);
+  createFlame();
 
-    document.getElementById("msg").innerText = "Happy Birthday " + name + " 🎉";
+  document.getElementById("msg").innerText = "🎉 Happy Birthday " + name;
 
-    startMic();
+  startMic();
 }
 
-function createCandles(parent) {
-    const count = 5;
+function createFlame() {
+  const candle = document.getElementById("candle");
 
-    for (let i = 0; i < count; i++) {
-        let c = document.createElement("div");
-        c.className = "candle";
-        c.style.left = (50 + i * 30) + "px";
-
-        let f = document.createElement("div");
-        f.className = "flame";
-
-        c.appendChild(f);
-        parent.appendChild(c);
-    }
+  candle.innerHTML = `
+    <div id="knot"></div>
+    <div class="flame"></div>
+    <div class="glow"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+    <div class="smoke"></div>
+  `;
 }
 
 function startMic() {
 navigator.mediaDevices.getUserMedia({ audio: true })
 .then(stream => {
 
-    const ctx = new AudioContext();
-    const mic = ctx.createMediaStreamSource(stream);
-    const analyser = ctx.createAnalyser();
+  const ctx = new AudioContext();
+  const mic = ctx.createMediaStreamSource(stream);
+  const analyser = ctx.createAnalyser();
 
-    mic.connect(analyser);
-    analyser.fftSize = 256;
+  mic.connect(analyser);
+  analyser.fftSize = 256;
 
-    const data = new Uint8Array(analyser.frequencyBinCount);
+  const data = new Uint8Array(analyser.frequencyBinCount);
 
-    function detect() {
-        analyser.getByteFrequencyData(data);
+  function detect() {
+    analyser.getByteFrequencyData(data);
+    let vol = data.reduce((a,b)=>a+b)/data.length;
 
-        let vol = data.reduce((a,b)=>a+b)/data.length;
+    if (vol > 60 && !blown) {
+      blown = true;
 
-        if(vol > 70 && !blown){
-            blown = true;
-            blowOut();
-        }
+      document.querySelector(".flame").style.display = "none";
+      document.querySelector(".glow").style.display = "none";
 
-        requestAnimationFrame(detect);
+      document.querySelectorAll(".smoke").forEach(s => s.classList.add("active"));
+
+      document.getElementById("msg").style.display = "block";
+      document.getElementById("controls").style.display = "block";
+
+      document.getElementById("song").play();
+
+      confetti();
     }
 
-    detect();
+    requestAnimationFrame(detect);
+  }
+
+  detect();
 })
-.catch(() => alert("Mic allow karo"));
+.catch(()=>alert("Mic allow karo!"));
 }
 
-function blowOut() {
-    document.querySelectorAll(".flame").forEach(f => {
-        f.classList.add("blow");
-    });
+function confetti() {
+  for (let i = 0; i < 120; i++) {
+    let c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100+"vw";
+    c.style.background = ["#ff7675","#74b9ff","#55efc4","#ffeaa7"][Math.floor(Math.random()*4)];
+    c.style.animationDuration = (Math.random()*3+2)+"s";
+    document.body.appendChild(c);
+  }
+}
 
-    setTimeout(() => {
-        document.getElementById("msg").classList.add("show");
-    }, 400);
+function stopMusic() {
+  document.getElementById("song").pause();
 }
 </script>
 
 </body>
 </html>
-```
