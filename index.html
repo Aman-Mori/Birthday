@@ -3,21 +3,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Ultimate 🎂</title>
+<title>Birthday Magic Pro 🎂</title>
 
 <style>
 body {
   margin: 0;
-  background: radial-gradient(circle at bottom, #0f2027, #203a43, #000);
+  background: radial-gradient(circle at bottom, #0f2027, #1c1c3c, #000);
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
   color: white;
+  overflow: hidden;
 }
 
 /* Heading */
 h1 {
   margin-top: 40px;
   font-weight: 300;
+  letter-spacing: 2px;
+  opacity: 0.9;
 }
 
 /* Input */
@@ -25,15 +28,20 @@ h1 {
   margin-top: 30px;
 }
 input, select, button {
-  padding: 10px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 8px;
   border: none;
   margin: 5px;
+  font-size: 14px;
 }
 button {
-  background: #ff7e5f;
+  background: linear-gradient(45deg, #ff7e5f, #ff3d77);
   color: white;
   cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  transform: scale(1.05);
 }
 
 /* Scene */
@@ -42,32 +50,35 @@ button {
   position: relative;
 }
 
-/* ===== 🎂 CAKE ===== */
+/* ===== CAKE ===== */
 .cake {
   position: relative;
   width: 260px;
   margin: auto;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .top {
   height: 30px;
-  background: #fff;
+  background: linear-gradient(#fff, #f1f1f1);
   border-radius: 50%;
   margin-bottom: -15px;
-  box-shadow: inset 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .layer {
   height: 55px;
   border-radius: 12px;
-  background: linear-gradient(to bottom, #fff, #eee);
+  background: linear-gradient(to bottom, #fff, #ddd);
   margin-top: -12px;
-  box-shadow: 
-    inset 0 5px 10px rgba(255,255,255,0.8),
-    0 10px 25px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-/* ===== 🕯️ CANDLE COMMON ===== */
+/* ===== CANDLE ===== */
 .candle-wrapper {
   position: absolute;
   left: 50%;
@@ -79,18 +90,17 @@ button {
   height: 140px;
   border-radius: 10px;
   background: linear-gradient(#f5f5f5, #ddd);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
   position: relative;
 }
 
-/* Only candle mode base glow */
+/* Only candle glow */
 .floor-glow {
   position: absolute;
-  bottom: -20px;
+  bottom: -25px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 30px;
+  width: 140px;
+  height: 40px;
   background: radial-gradient(circle, rgba(255,200,100,0.3), transparent);
   border-radius: 50%;
 }
@@ -114,15 +124,15 @@ button {
   width: 18px;
   height: 30px;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse, #fff, #ffd700, #ff8c00);
+  background: radial-gradient(circle, #fff, #ffd700, #ff8c00);
   border-radius: 50%;
   animation: flicker 0.15s infinite alternate;
-  box-shadow: 0 0 30px orange;
+  box-shadow: 0 0 35px orange;
 }
 
 @keyframes flicker {
   from { transform: translateX(-50%) scale(1); }
-  to { transform: translateX(-48%) scale(1.15); }
+  to { transform: translateX(-48%) scale(1.2); }
 }
 
 /* Glow */
@@ -130,11 +140,11 @@ button {
   position: absolute;
   bottom: 120%;
   left: 50%;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   transform: translateX(-50%);
   border-radius: 50%;
-  box-shadow: 0 0 80px 40px rgba(255,200,100,0.25);
+  box-shadow: 0 0 100px 50px rgba(255,200,100,0.25);
   animation: glow 2s infinite;
 }
 
@@ -156,33 +166,49 @@ button {
   animation: smokeUp 2s forwards;
 }
 @keyframes smokeUp {
-  to { transform: translateY(-100px) scale(2.5); opacity: 0; }
+  to { transform: translateY(-120px) scale(3); opacity: 0; }
 }
 
 /* Message */
 .message {
   display: none;
   margin-top: 20px;
-  font-size: 28px;
+  font-size: 30px;
   color: gold;
+  animation: fadeIn 2s ease forwards;
 }
 
-/* Controls */
-.controls {
-  display: none;
-  margin-top: 20px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
 /* Confetti */
 .confetti {
   position: fixed;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   top: 0;
   animation: fall linear forwards;
 }
+
 @keyframes fall {
-  to { transform: translateY(100vh); }
+  to { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* Sparkles */
+.sparkle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
 }
 </style>
 
@@ -190,7 +216,7 @@ button {
 
 <body>
 
-<h1>🎂 Birthday Magic 🎉</h1>
+<h1>🎂 Make a Wish 🎉</h1>
 
 <div class="input-box">
   <input type="text" id="name" placeholder="Enter Name">
@@ -204,13 +230,6 @@ button {
 <div id="scene"></div>
 
 <div class="message" id="msg"></div>
-
-<div class="controls" id="controls">
-  <button onclick="stopMusic()">Stop Music ⏹️</button>
-  <button onclick="location.reload()">Restart 🔁</button>
-</div>
-
-<audio id="song" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c7d1c8e9c.mp3"></audio>
 
 <script>
 let blown = false;
@@ -255,6 +274,7 @@ function start() {
   document.getElementById("msg").innerText = "🎉 Happy Birthday " + name;
 
   startMic();
+  createSparkles();
 }
 
 function createFlame() {
@@ -296,9 +316,6 @@ navigator.mediaDevices.getUserMedia({ audio: true })
       document.querySelectorAll(".smoke").forEach(s => s.classList.add("active"));
 
       document.getElementById("msg").style.display = "block";
-      document.getElementById("controls").style.display = "block";
-
-      document.getElementById("song").play();
 
       confetti();
     }
@@ -312,18 +329,25 @@ navigator.mediaDevices.getUserMedia({ audio: true })
 }
 
 function confetti() {
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 150; i++) {
     let c = document.createElement("div");
     c.className = "confetti";
     c.style.left = Math.random()*100+"vw";
-    c.style.background = ["#ff7675","#74b9ff","#55efc4","#ffeaa7"][Math.floor(Math.random()*4)];
+    c.style.background = ["#ff7675","#74b9ff","#55efc4","#ffeaa7","#fd79a8"][Math.floor(Math.random()*5)];
     c.style.animationDuration = (Math.random()*3+2)+"s";
     document.body.appendChild(c);
   }
 }
 
-function stopMusic() {
-  document.getElementById("song").pause();
+function createSparkles() {
+  for (let i = 0; i < 60; i++) {
+    let s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = Math.random()*100+"vw";
+    s.style.top = Math.random()*100+"vh";
+    s.style.animationDelay = Math.random()*2+"s";
+    document.body.appendChild(s);
+  }
 }
 </script>
 
